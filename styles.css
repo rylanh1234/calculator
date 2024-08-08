@@ -5,6 +5,49 @@ body {
     align-items: center;
 }
 
+button {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.displayContainer {
+    display: flex;
+    justify-content: right;
+    align-items: end;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    height: 10vh;
+    width: 50vh;
+    border: 1px solid black;
+}
+.displayText {
+    padding: 1vh;
+    font-size: 3em;
+}
+
 .buttonContainer {
     display: flex;
+    flex-direction: column;
+    height: 30vh;
+    width: 50vh;
+    gap: 0.5vh;
+}
+
+.row {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    gap: 0.5vh;
+}
+
+.btnWrapper {
+    width: 100%;
+}
+#rowOne {
+    display: flex;
+    justify-content: right;
+}
+#rowOne .btnWrapper {
+    width: 25%;
 }
