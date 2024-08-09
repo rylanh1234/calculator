@@ -20,6 +20,8 @@ function divide(a, b) {
 }
 
 function operate(operator, number1, number2) {
+    number1 = Number(number1);
+    number2 = Number(number2)
     if (operator == "add") {
         return add(number1, number2)
     }
@@ -37,37 +39,41 @@ function operate(operator, number1, number2) {
 let number1 = "";
 let number2 = "";
 let operator = "";
-const maxLength = 19;
+const maxLength = 17;
 const numericalValues = "1234567890";
 const buttons = document.querySelectorAll("button")
 const displayValue = document.querySelector(".displayText")
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (displayValue.textContent.length < maxLength) {
-            if (button.id == "clear") {
-                number1 = "";
-                number2 = "";
-                operator = "";
-                displayValue.textContent = "0";
-            }
-            else if (numericalValues.includes(button.id)) {
-                if (operator == "") {
+
+        if (button.id == "clear") {
+            number1 = "";
+            number2 = "";
+            operator = "";
+            displayValue.textContent = "0";
+        }
+        else if (numericalValues.includes(button.id)) {
+            if (operator == "") {
+                if (displayValue.textContent.length < maxLength) {
                     number1 += button.id
                     displayValue.textContent = number1;
                 }
-                else {
+            }
+            else {
+                if (displayValue.textContent.length < maxLength+2) {
                     number2 += button.id
                     displayValue.textContent += button.id;
                 }
             }
-            else if (button.classList.contains("operator")) {
-                displayValue.textContent += button.innerText;
-                operator = button.id;
-            }
-            else if (button.id == "equals") {
-                displayValue.textContent = operate(operator, number1, number2)
-            }
         }
+        else if (button.classList.contains("operator")) {
+            displayValue.textContent += button.innerText;
+            operator = button.id;
+        }
+        else if (button.id == "equals") {
+            displayValue.textContent = operate(operator, number1, number2)
+        }
+
         if (button.id == "clear") {
             number1 = "";
             number2 = "";
@@ -79,3 +85,6 @@ buttons.forEach((button) => {
         }
     })
 })
+
+// split the maxLength
+// clear after equals
