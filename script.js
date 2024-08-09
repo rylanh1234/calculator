@@ -34,32 +34,48 @@ function operate(operator, number1, number2) {
     }
 }
 
-let number1 = 0;
-let number2 = 0;
+let number1 = "";
+let number2 = "";
 let operator = "";
-let userInput = "";
+const maxLength = 19;
 const numericalValues = "1234567890";
 const buttons = document.querySelectorAll("button")
 const displayValue = document.querySelector(".displayText")
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        userInput = button.id
+        if (displayValue.textContent.length < maxLength) {
+            if (button.id == "clear") {
+                number1 = "";
+                number2 = "";
+                operator = "";
+                displayValue.textContent = "0";
+            }
+            else if (numericalValues.includes(button.id)) {
+                if (operator == "") {
+                    number1 += button.id
+                    displayValue.textContent = number1;
+                }
+                else {
+                    number2 += button.id
+                    displayValue.textContent += button.id;
+                }
+            }
+            else if (button.classList.contains("operator")) {
+                displayValue.textContent += button.innerText;
+                operator = button.id;
+            }
+            else if (button.id == "equals") {
+                displayValue.textContent = operate(operator, number1, number2)
+            }
+        }
         if (button.id == "clear") {
-            number1 = 0;
-            number2 = 0;
+            number1 = "";
+            number2 = "";
             operator = "";
-            userInput = "";
             displayValue.textContent = "0";
         }
-        else if (numericalValues.includes(button.id)) {
-            displayValue.textContent = button.id;
-        }
-        else if (button.classList.contains("operator")) {
-            displayValue.textContent = button.innerText;
-            operator = button.id;
-        }
         else if (button.id == "equals") {
-            displayValue.textContent = operate(operator,number1,number2)
+            displayValue.textContent = operate(operator, number1, number2)
         }
     })
 })
