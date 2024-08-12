@@ -58,19 +58,19 @@ buttons.forEach((button) => {
         }
         else if (numericalValues.includes(button.id) && displayValue.textContent.length < maxLength) {
             if (operator == "") {
-                    number1 += button.id;
-                    displayValue.textContent = number1;
-                
+                number1 += button.id;
+                displayValue.textContent = number1;
+
             }
             else if (operator !== "" && operatorN == "") {
-                    number2 += button.id;
-                    displayValue.textContent += button.id;
-                
+                number2 += button.id;
+                displayValue.textContent += button.id;
+
             }
             else if (operatorN !== "") {
-                    operateAfter += button.id;
-                    displayValue.textContent += button.id;
-                
+                operateAfter += button.id;
+                displayValue.textContent += button.id;
+
             }
         }
         else if (button.classList.contains("operator")
@@ -88,8 +88,27 @@ buttons.forEach((button) => {
         }
         else if (button.id == "equals") {
             displayValue.textContent = operate(operator, number1, number2) + operateAfter
+            number1 = operate(operator, number1, number2)
+            if (operateAfter[0] == "+") {
+                operator = "add";
+            }
+            else if (operateAfter[0] == "-") {
+                operator = "subtract"
+            }
+            else if (operateAfter[0] == "×") {
+                operator = "multiply"
+            }
+            else {
+                operator = "divide"
+            }
+            number2 = operateAfter.split(/[-+×÷]/).filter(Boolean)[0] // - at beginning to ensure interpretation as literal instead of hyphen
+            if (number2 !== undefined) {
+                operateAfter = operateAfter.slice(number2.length + 1)
+            }
         }
     })
 })
 
-// clear after equals
+// clear after equals / successive evaluations (num2)
+// equals num1 when 1 num type
+// equals refresh if num or continue if op
