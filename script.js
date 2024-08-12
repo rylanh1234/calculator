@@ -41,7 +41,7 @@ let number2 = "";
 let operator = "";
 let operatorN = "";
 let operateAfter = "";
-const maxLength = 17;
+const maxLength = 19;
 const numericalValues = "1234567890";
 const buttons = document.querySelectorAll("button")
 const displayValue = document.querySelector(".displayText")
@@ -56,28 +56,26 @@ buttons.forEach((button) => {
             operateAfter = "";
             displayValue.textContent = "0";
         }
-        else if (numericalValues.includes(button.id)) {
+        else if (numericalValues.includes(button.id) && displayValue.textContent.length < maxLength) {
             if (operator == "") {
-                if (displayValue.textContent.length < maxLength) {
                     number1 += button.id;
                     displayValue.textContent = number1;
-                }
+                
             }
             else if (operator !== "" && operatorN == "") {
-                if (displayValue.textContent.length < maxLength + 2) {
                     number2 += button.id;
                     displayValue.textContent += button.id;
-                }
+                
             }
             else if (operatorN !== "") {
-                if (displayValue.textContent.length < maxLength + 2) {
                     operateAfter += button.id;
                     displayValue.textContent += button.id;
-                }
+                
             }
         }
         else if (button.classList.contains("operator")
-            && numericalValues.includes(displayValue.textContent[displayValue.textContent.length - 1])) {
+            && numericalValues.includes(displayValue.textContent[displayValue.textContent.length - 1])
+            && displayValue.textContent.length < maxLength) {
             if (operator == "") {
                 displayValue.textContent += button.innerText;
                 operator = button.id;
@@ -95,4 +93,3 @@ buttons.forEach((button) => {
 })
 
 // clear after equals
-// allow only one operator in a row
