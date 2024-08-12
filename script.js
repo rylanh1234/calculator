@@ -39,6 +39,8 @@ function operate(operator, number1, number2) {
 let number1 = "";
 let number2 = "";
 let operator = "";
+let operatorN = "";
+let operateAfter = "";
 const maxLength = 17;
 const numericalValues = "1234567890";
 const buttons = document.querySelectorAll("button")
@@ -50,41 +52,47 @@ buttons.forEach((button) => {
             number1 = "";
             number2 = "";
             operator = "";
+            operatorN = "";
+            operateAfter = "";
             displayValue.textContent = "0";
         }
         else if (numericalValues.includes(button.id)) {
             if (operator == "") {
                 if (displayValue.textContent.length < maxLength) {
-                    number1 += button.id
+                    number1 += button.id;
                     displayValue.textContent = number1;
                 }
             }
-            else {
-                if (displayValue.textContent.length < maxLength+2) {
-                    number2 += button.id
+            else if (operator !== "" && operatorN == "") {
+                if (displayValue.textContent.length < maxLength + 2) {
+                    number2 += button.id;
+                    displayValue.textContent += button.id;
+                }
+            }
+            else if (operatorN !== "") {
+                if (displayValue.textContent.length < maxLength + 2) {
+                    operateAfter += button.id;
                     displayValue.textContent += button.id;
                 }
             }
         }
-        else if (button.classList.contains("operator")) {
-            displayValue.textContent += button.innerText;
-            operator = button.id;
+        else if (button.classList.contains("operator")
+            && numericalValues.includes(displayValue.textContent[displayValue.textContent.length - 1])) {
+            if (operator == "") {
+                displayValue.textContent += button.innerText;
+                operator = button.id;
+            }
+            else if (operator !== "") {
+                displayValue.textContent += button.innerText;
+                operatorN = button.id;
+                operateAfter += button.innerText;
+            }
         }
         else if (button.id == "equals") {
-            displayValue.textContent = operate(operator, number1, number2)
-        }
-
-        if (button.id == "clear") {
-            number1 = "";
-            number2 = "";
-            operator = "";
-            displayValue.textContent = "0";
-        }
-        else if (button.id == "equals") {
-            displayValue.textContent = operate(operator, number1, number2)
+            displayValue.textContent = operate(operator, number1, number2) + operateAfter
         }
     })
 })
 
-// split the maxLength
 // clear after equals
+// allow only one operator in a row
