@@ -63,8 +63,14 @@ buttons.forEach((button) => {
 
             }
             else if (operator !== "" && operatorN == "") {
-                number2 += button.id;
-                displayValue.textContent += button.id;
+                if (number2 == undefined) {
+                    number2 = button.id;
+                    displayValue.textContent += button.id;
+                }
+                else {
+                    number2 += button.id;
+                    displayValue.textContent += button.id;
+                }
 
             }
             else if (operatorN !== "") {
@@ -87,7 +93,7 @@ buttons.forEach((button) => {
             }
         }
         else if (button.id == "equals") {
-            if (number2 == "") {
+            if (number2 == "" || number2 == undefined) {
                 displayValue.textContent = number1;
             }
             else {
@@ -102,12 +108,16 @@ buttons.forEach((button) => {
                 else if (operateAfter[0] == "×") {
                     operator = "multiply"
                 }
-                else {
+                else if (operateAfter[0] == "÷") {
                     operator = "divide"
                 }
                 number2 = operateAfter.split(/[-+×÷]/).filter(Boolean)[0] // - at beginning to ensure interpretation as literal instead of hyphen
                 if (number2 !== undefined) {
                     operateAfter = operateAfter.slice(number2.length + 1)
+                }
+                else if (operateAfter == "") {
+                    operatorN = "";
+                    operator = ""
                 }
             }
         }
