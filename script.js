@@ -35,7 +35,14 @@ function operate(operator, number1, number2) {
         return divide(number1, number2)
     }
 }
-
+function clearCalculator() {
+    number1 = "";
+    number2 = "";
+    operator = "";
+    operatorN = "";
+    operateAfter = "";
+    displayValue.textContent = "0";
+}
 let number1 = "";
 let number2 = "";
 let operator = "";
@@ -49,12 +56,7 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
 
         if (button.id == "clear") {
-            number1 = "";
-            number2 = "";
-            operator = "";
-            operatorN = "";
-            operateAfter = "";
-            displayValue.textContent = "0";
+            clearCalculator()
         }
         else if (numericalValues.includes(button.id) && displayValue.textContent.length < maxLength) {
             if (operator == "") {
