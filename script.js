@@ -42,12 +42,14 @@ function clearCalculator() {
     operatorN = "";
     operateAfter = "";
     displayValue.textContent = "0";
+    calculationComplete = false;
 }
 let number1 = "";
 let number2 = "";
 let operator = "";
 let operatorN = "";
 let operateAfter = "";
+let calculationComplete = false;
 const maxLength = 19;
 const numericalValues = "1234567890";
 const buttons = document.querySelectorAll("button")
@@ -59,6 +61,9 @@ buttons.forEach((button) => {
             clearCalculator()
         }
         else if (numericalValues.includes(button.id) && displayValue.textContent.length < maxLength) {
+            if (calculationComplete) {
+                clearCalculator()
+            }
             if (operator == "") {
                 number1 += button.id;
                 displayValue.textContent = number1;
@@ -119,11 +124,10 @@ buttons.forEach((button) => {
                 }
                 else if (operateAfter == "") {
                     operatorN = "";
-                    operator = ""
+                    operator = "";
+                    calculationComplete = true;
                 }
             }
         }
     })
 })
-
-// equals refresh if num or continue if op
