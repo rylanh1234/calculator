@@ -134,4 +134,15 @@ buttons.forEach((button) => {
     })
 })
 
+// let lastChanged = null;
+// document.addEventListener("change", (e) => {
+//     lastChanged = e.target;
+//     console.log(lastChanged)
+//     console.log('test')
+// })
 // click number in middle of calculations
+// backspace btn
+// decimal btn
+// round answers with long decimals
+// keyboard support
+// make it look nice (coloured operator btns)
