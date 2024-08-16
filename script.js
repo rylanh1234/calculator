@@ -89,6 +89,8 @@ buttons.forEach((button) => {
         else if (button.classList.contains("operator")
             && numericalValues.includes(displayValue.textContent[displayValue.textContent.length - 1])
             && displayValue.textContent.length < maxLength) {
+                
+            calculationComplete = false;
             if (operator == "") {
                 displayValue.textContent += button.innerText;
                 operator = button.id;
@@ -131,3 +133,5 @@ buttons.forEach((button) => {
         }
     })
 })
+
+// click number in middle of calculations
